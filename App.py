@@ -4,13 +4,7 @@ from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen
 import io
 import nltk
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 
-servico = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=servico)
 
 
 
