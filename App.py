@@ -4,6 +4,16 @@ from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen
 import io
 import nltk
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+servico = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=servico)
+
+
+
 nltk.download('punkt')
 
 st.set_page_config(page_title='InNews🇮🇳: A Summarised News📰 Portal', page_icon='./Meta/newspaper.ico')
@@ -32,6 +42,7 @@ def run():
     cat_op = st.selectbox('Select your Category', category)
     if cat_op == category[0]:
         st.warning('Please select Type!!')
- 
+    elif cat_op == 'SP':
+        st.warning(cat_op)
 
 run()
