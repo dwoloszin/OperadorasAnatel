@@ -1,30 +1,65 @@
-import util
-credentials = util.getCredentials()
+import pandas as pd
+import os
+import sys
+import time
+import zipfile
+import time
 
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+import AnatelFiles
+import ImportDF
+import Csv_zip
+import CleanData
+import distCalc
+import distanceT
+import GOOGLE_CREATOR
+import timeit
+inicioTotal = timeit.default_timer()
 
-servico = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=servico)
-
-#driver = webdriver.Chrome(executable_path=r'C:\Users\f8059678\OneDrive - TIM\Dario\@_PYTHON\@Selenium\chromedriver\chromedriver.exe')
-
-def launchBrowser():
-  driver.get(credentials['ANATEL_Mosiac'])
-  '''
-  driver.find_element('xpath','//*[@id="Uid"]').send_keys(credentials['MS_login'])
-  driver.find_element('xpath','//*[@id="Pwd"]').send_keys(credentials['MS_passwd'])
-  driver.find_element('xpath','//*[@id="3054"]').click()
-  driver.find_element('xpath','//*[@id="projects_ProjectsStyle"]/table/tbody/tr[2]/td[1]/div/table/tbody/tr/td[2]/a').click()
-  driver.find_element('xpath','//*[@id="dktpSectionView"]/a[2]/div[1]').click()
-  driver.find_element('xpath','//*[@id="FolderIcons"]/tbody/tr[16]/td[2]/div/table/tbody/tr/td[2]/a').click()
-  '''
-
-  while(True):
-      pass
-launchBrowser()
+#timeexport = time.strftime("%Y%m%d_")
+script_dir = os.path.abspath(os.path.dirname(sys.argv[0]) or '.')
 
 
+csv_path = os.path.join(script_dir, 'export/'+'AnatelBase'+'.csv')
+zip_path = os.path.join(script_dir, 'export/'+'AnatelBase'+'.zip')
+
+#Download All files
+AnatelFiles.download('SP',['GSM', 'WCDMA', 'LTE', 'NR'])
+
+
+
+
+# Example usage:
+#zip_directory = 'E:\GoogleDriveOnline\PYTHON\OperadorasAnatel\import\BaseAnatel'
+zip_directory = os.path.join(script_dir, 'import/'+'Baseanatel')
+df = ImportDF.ImportDFFromZip(zip_directory)
+
+
+df.drop_duplicates(inplace=True, ignore_index=True)
+
+df = CleanData.process(df)
+
+
+#run once a month
+
+'''
+opList = ['TIM','CLARO','VIVO','ALGAR']
+for i in opList:
+    distCalc.process(i)
+'''
+df = distanceT.process(df)
+
+
+df.to_csv(csv_path, sep=',',encoding='ANSI', index=False)  # Save DataFrame as CSV
+time.sleep(10)
+Csv_zip.process(csv_path)
+
+
+
+GOOGLE_CREATOR.process()
+
+
+
+fimtotal = timeit.default_timer()
+print ('duracao: %f' % round(((fimtotal - inicioTotal)/60),2) + ' min') 
+print ('\nALL_DONE!!!')
 
