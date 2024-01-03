@@ -38,14 +38,16 @@ df.drop_duplicates(inplace=True, ignore_index=True)
 
 df = CleanData.process(df)
 
-
-#run once a month
-
 '''
+#==========================================
+#run once a month
 opList = ['TIM','CLARO','VIVO','ALGAR']
 for i in opList:
     distCalc.process(i)
-'''
+#=======================================
+''' 
+
+
 df = distanceT.process(df)
 
 
