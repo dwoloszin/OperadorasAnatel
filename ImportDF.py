@@ -41,6 +41,7 @@ def ImportDF_fields(pathImport,fields):
         fileData = datetime.fromtimestamp(getmtime(filename)).strftime('%Y%m%d')
         iter_csv = pd.read_csv(filename, index_col=None, encoding="ANSI",header=0, on_bad_lines='skip',dtype=str, sep = ',',decimal=',',iterator=True, chunksize=10000, usecols = fields )
         df = pd.concat([chunk for chunk in iter_csv]) # & |  WORKS
+  
         li.append(df)
     frameSI = pd.concat(li, axis=0, ignore_index=True)
     frameSI = frameSI.drop_duplicates()
@@ -76,6 +77,7 @@ def ImportDFFromZip(zip_dir):
                 file_data = datetime.fromtimestamp(os.path.getmtime(csv_file)).strftime('%Y%m%d')
                 iter_csv = pd.read_csv(csv_file, index_col=None, encoding="ANSI", header=0, on_bad_lines='skip', dtype=str, sep=',', decimal=',', iterator=True, chunksize=10000)
                 df = pd.concat([chunk for chunk in iter_csv])
+                df['UpdateDate'] = file_data
                 li.append(df)
 
             # Clean up by removing the temporary directory and its contents for each zip file

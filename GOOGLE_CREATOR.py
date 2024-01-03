@@ -14,15 +14,23 @@ import ImportDF
 
 
 
+
+
+
+
+
+
+
 def process():
     script_dir = os.path.abspath(os.path.dirname(sys.argv[0]) or '.')
     zip_directory = os.path.join(script_dir, 'export')
+
     csv_path = os.path.join(script_dir, 'export/'+'GOOGLE_ALL')
     frameSI = ImportDF.ImportDFFromZip(zip_directory)
     frameSI_copy = frameSI.copy()
     frameSI_Null = frameSI_copy[~frameSI_copy['Azimute_(Median)'].astype(bool)]
-
-    kml = Kml(name="GOOGLE_ALL", open=1)
+    UpdateDate = frameSI['UpdateDate'][0]
+    kml = Kml(name="GOOGLE_ALL_"+UpdateDate, open=1)
     screen = kml.newscreenoverlay(name='Legends')
     legend_path = os.path.join(script_dir, 'import/legend/'+'legend5'+'.png')
     screen.icon.href = legend_path
