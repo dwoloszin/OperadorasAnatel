@@ -32,7 +32,7 @@ AnatelFiles.download('SP',['GSM', 'WCDMA', 'LTE', 'NR'])
 #zip_directory = 'E:\GoogleDriveOnline\PYTHON\OperadorasAnatel\import\BaseAnatel'
 zip_directory = os.path.join(script_dir, 'import/'+'Baseanatel')
 df = ImportDF.ImportDFFromZip(zip_directory)
-
+ 
 
 df.drop_duplicates(inplace=True, ignore_index=True)
 
