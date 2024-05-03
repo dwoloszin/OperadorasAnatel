@@ -56,7 +56,7 @@ def wait_for_downloads_to_complete():
             break
         time.sleep(1)  # Wait for 1 second and then check again
 
-delayTime = 2
+delayTime = 3
 
 def launchBrowser(state, tec_List):
     cleanFolder(download_directory)
@@ -83,7 +83,8 @@ def launchBrowser(state, tec_List):
         element.send_keys(i)
         element.send_keys(Keys.RETURN)
         time.sleep(20)
-        driver.find_element('xpath','//*[@id="download_filtradas"]').click()
+        #driver.find_element('xpath','//*[@id="download_filtradas"]').click()
+        driver.find_element('xpath','//*[@id="download_csv"]').click()
         time.sleep(delayTime)
         time.sleep(20)
 
