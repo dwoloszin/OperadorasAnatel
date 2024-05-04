@@ -27,7 +27,7 @@ if __name__ == "__main__":
     zip_path = os.path.join(script_dir, 'export/'+'AnatelBase'+'.zip')
 
     #Download All files
-    AnatelFiles.download('SP',['GSM'])
+    AnatelFiles.download('SP',['GSM','WCDMA'])
     #AnatelFiles.download('SP',['GSM', 'WCDMA', 'LTE', 'NR'])
 
 
