@@ -1,3 +1,4 @@
+pyyaml
 Pillow
 urllib3
 streamlit
@@ -9,4 +10,3 @@ webdriver-manager
 nltk
 simplekml
 pyproj
-

@@ -23,7 +23,8 @@ csv_path = os.path.join(script_dir, 'export/'+'AnatelBase'+'.csv')
 zip_path = os.path.join(script_dir, 'export/'+'AnatelBase'+'.zip')
 
 #Download All files
-AnatelFiles.download('SP',['GSM', 'WCDMA', 'LTE', 'NR'])
+AnatelFiles.download('SP',['GSM'])
+#AnatelFiles.download('SP',['GSM', 'WCDMA', 'LTE', 'NR'])
 
 
 
@@ -45,7 +46,7 @@ opList = ['TIM','CLARO','VIVO','ALGAR']
 for i in opList:
     distCalc.process(i)
 #=======================================
-''' 
+'''
 
 
 df = distanceT.process(df)

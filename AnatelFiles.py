@@ -72,7 +72,7 @@ def launchBrowser(state, tec_List):
         chrome_options.add_argument("--ignore-certificate-errors")
         chrome_options.add_argument('--headless')
         driver = webdriver.Chrome(service=servico, options=chrome_options)
-        driver.get(credentials['ANATEL_Mosiac'])
+        driver.get('http://sistemas.anatel.gov.br/se/public/view/b/licenciamento.php')
         time.sleep(delayTime)
         driver.find_element('xpath','//*[@id="tblFilter"]/span[5]').click()
         time.sleep(delayTime)
@@ -106,5 +106,5 @@ def rename_downloaded_files(ArchiveName):
         os.rename(latest_file_path, custom_filename)
 
 def download(stade, tec_List):
-  while getFilesDate(download_directory) or getFileCount() <= 3:
+  while getFilesDate(download_directory) or getFileCount() < 0:
       launchBrowser(stade, tec_List)
