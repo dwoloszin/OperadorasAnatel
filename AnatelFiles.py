@@ -1,5 +1,4 @@
 import util
-credentials = util.getCredentials()
 import os
 import sys
 import shutil
